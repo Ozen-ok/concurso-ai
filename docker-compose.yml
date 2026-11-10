@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:18
+    container_name: concurso-ai-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: concurso_ai
+      POSTGRES_USER: concurso_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+
+volumes:
+  postgres_data:
