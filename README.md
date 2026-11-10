@@ -18,7 +18,7 @@ A interface apresenta um espaço de estudos, disciplinas e uma área para ativid
 - **Migrações e testes:** Alembic e pytest; há testes para a rota de saúde e uma verificação de integração com PostgreSQL.
 - **Configuração:** o Compose lê `POSTGRES_PASSWORD` do `.env` na raiz. O backend lê suas configurações de `backend/.env`; use `backend/.env.example` como referência e ajuste a URL do banco para a senha configurada localmente.
 
-O frontend e a API são aplicações separadas. A configuração atual não mostra uma integração entre a interface e a API.
+O frontend e a API são aplicações separadas, mas já existe uma integração mínima: o frontend consulta `GET /health` no backend para indicar a disponibilidade da API. Essa chamada ainda não representa um fluxo funcional de produto e não verifica a conexão com o PostgreSQL.
 
 ## Estrutura do repositório
 
@@ -111,7 +111,7 @@ O teste de integração requer o PostgreSQL local configurado em `backend/.env`.
 
 **Presente no repositório:** uma página inicial de frontend com componentes visuais de disciplinas e atividades recentes; uma API FastAPI com a rota `/health`; configuração de conexão assíncrona com PostgreSQL; estrutura inicial de migrações Alembic e testes.
 
-**Ainda não implementado:** fluxo de conversa com IA, persistência de usuários ou sessões de estudo, operações de conteúdo/disciplinas na API e comunicação entre frontend e backend. A interface de tutoria é atualmente demonstrativa.
+**Ainda não implementado:** fluxo de conversa com IA, persistência de usuários ou sessões de estudo, operações de conteúdo/disciplinas na API e fluxos funcionais de produto entre frontend e backend. A interface de tutoria é atualmente demonstrativa.
 
 ## Próximos passos sugeridos
 
