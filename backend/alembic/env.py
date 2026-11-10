@@ -1,4 +1,6 @@
-import asyncio
+import asyncio, sys
+
+from app.core.windows_loop import selector_loop_factory
 from logging.config import fileConfig
 
 from alembic import context
@@ -8,6 +10,7 @@ from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from app.core.config import settings
 from app.db.base import Base
+import app.models  # noqa: F401
 
 config = context.config
 config.set_main_option("sqlalchemy.url", settings.database_url.replace("%", "%%"))
@@ -50,4 +53,10 @@ async def run_migrations_online() -> None:
 if context.is_offline_mode():
     run_migrations_offline()
 else:
-    asyncio.run(run_migrations_online())
+    if sys.platform == "win32":
+        asyncio.run(
+            run_migrations_online(),
+            loop_factory=selector_loop_factory,
+        )
+    else:
+        asyncio.run(run_migrations_online())
