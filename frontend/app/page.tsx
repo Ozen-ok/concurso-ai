@@ -1,4 +1,6 @@
+import { Suspense } from "react";
 import { ActivitySection, Header, SubjectCard, StudyHero } from "./components/dashboard";
+import { ApiStatus, ApiStatusFallback } from "./components/api-status";
 
 const subjects = [
   { name: "Língua Portuguesa", category: "Linguagens", icon: "Aa", tone: "violet" },
@@ -10,7 +12,13 @@ const subjects = [
 export default function Home() {
   return (
     <main id="inicio" className="min-h-screen bg-[#f7f8fc] text-slate-900">
-      <Header />
+      <Header
+        apiStatus={
+          <Suspense fallback={<ApiStatusFallback />}>
+            <ApiStatus />
+          </Suspense>
+        }
+      />
       <div className="mx-auto max-w-7xl px-5 pb-16 pt-10 sm:px-8 lg:px-10 lg:pt-14">
         <section aria-labelledby="welcome-title" className="mb-10">
           <p className="mb-2 text-sm font-semibold tracking-wide text-indigo-600">SEU ESPAÇO DE ESTUDOS</p>

@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 function BrandMark() {
   return (
     <span className="flex size-10 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-sm shadow-indigo-200" aria-hidden="true">
@@ -9,7 +11,7 @@ function BrandMark() {
   );
 }
 
-export function Header() {
+export function Header({ apiStatus }: { apiStatus: ReactNode }) {
   return (
     <header className="border-b border-slate-200/80 bg-white">
       <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-10">
@@ -17,10 +19,7 @@ export function Header() {
           <BrandMark />
           <span className="text-lg font-semibold tracking-tight text-slate-900">Concurso<span className="text-indigo-600">AI</span></span>
         </a>
-        <div className="hidden items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3.5 py-2 text-sm text-slate-600 sm:flex">
-          <span className="size-2 rounded-full bg-emerald-500" aria-hidden="true" />
-          Seu espaço de preparação
-        </div>
+        {apiStatus}
         <div className="flex size-10 items-center justify-center rounded-full bg-indigo-50 text-sm font-semibold text-indigo-700" aria-label="Perfil">
           CA
         </div>
@@ -106,4 +105,3 @@ export function ActivitySection() {
     </section>
   );
 }
-
