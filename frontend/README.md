@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ConcursoAI — Frontend
 
-## Getting Started
+Interface web da plataforma ConcursoAI, desenvolvida com Next.js e React.
 
-First, run the development server:
+O frontend é responsável pela experiência de interação do estudante com a plataforma. A comunicação com o backend é realizada por meio da API FastAPI, mantendo as responsabilidades de autenticação, regras de negócio, persistência e orquestração da IA no servidor.
+
+## Tecnologias
+
+- **Next.js 16.4.5** — framework da aplicação web.
+- **React 19.3.0** — biblioteca de interface.
+- **TypeScript 5** — tipagem estática.
+- **Tailwind CSS 4** — estilização.
+- **ESLint 9** — análise estática do código.
+
+## Pré-requisitos
+
+- Node.js e npm instalados.
+- Backend do ConcursoAI configurado, quando a funcionalidade utilizada depender da API.
+
+## Instalação
+
+A partir deste diretório, instale as dependências:
+
+```bash
+npm install
+```
+
+## Configuração
+
+O frontend utiliza a variável de ambiente `BACKEND_API_URL` para definir o endereço da API FastAPI.
+
+Crie um arquivo `.env.local` neste diretório:
+
+```env
+BACKEND_API_URL=http://localhost:PORTA_DO_BACKEND
+```
+
+Substitua `PORTA_DO_BACKEND` pela porta configurada no ambiente do backend.
+
+Essa variável é utilizada no servidor Next.js para realizar a comunicação com a API. Não deve ser exposta como variável pública (`NEXT_PUBLIC_`).
+
+## Executando em desenvolvimento
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+A aplicação estará disponível em:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Verificações
 
-## Learn More
+Executar o ESLint:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run lint
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Gerar a versão de produção:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run build
+```
 
-## Deploy on Vercel
+Executar a versão de produção:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run start
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+O comando `npm run start` deve ser executado após a geração do build.
+
+## Estrutura do projeto
+
+```text
+frontend/
+├── app/
+│   ├── components/
+│   │   ├── api-status.tsx
+│   │   └── dashboard.tsx
+│   ├── layout.tsx
+│   └── page.tsx
+├── public/
+├── package.json
+└── README.md
+```
+
+A estrutura poderá evoluir conforme a implementação dos módulos da plataforma.
+
+## Integração com o backend
+
+A comunicação com o backend acontece por meio de requisições HTTP realizadas no servidor Next.js.
+
+O componente `ApiStatus` consulta o endpoint `/health` da API para verificar sua disponibilidade.
+
+O frontend não deve acessar diretamente o banco de dados nem armazenar credenciais de provedores de IA. Essas responsabilidades pertencem ao backend.
